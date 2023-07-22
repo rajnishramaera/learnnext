@@ -1,7 +1,21 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter, Roboto_Mono, JetBrains_Mono } from "next/font/google"
+async function getData() {
+  const res = await fetch(
+    "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+  )
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data")
+  }
+
+  return res.json()
+}
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -29,6 +43,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  console.log(getData())
+
   return (
     <html
       lang="en"
