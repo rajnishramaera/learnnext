@@ -13,7 +13,6 @@ const page = () => {
   useEffect(() => {
     if (ApiDataFromRedux?.userId) setId(ApiDataFromRedux.userId)
   }, [])
-  console.log(ApiDataFromRedux)
   return (
     <>
       <Link href={"/dashboard"}>admin</Link>
